@@ -13,6 +13,17 @@ public class RockPaperScissors {
         game.startGame();
     }
 
+    public void generateHMAC() {
+        SecureRandom random = new SecureRandom();
+        byte bytes[] = new byte[32];
+        random.nextBytes(bytes);
+        StringBuilder sb = new StringBuilder();
+        for (byte b : bytes) {
+            sb.append(String.format("%02x", b));
+        }
+        System.out.println("HAMC:\n" + sb.toString());
+    }
+
     private enum Move {
         ROCK, PAPER, SCISSORS, LIZARD, SPOCK, HELP;
         public int compareMoves(Move otherMove) {
@@ -107,14 +118,7 @@ public class RockPaperScissors {
     }
 
     public void startGame() {
-        SecureRandom random = new SecureRandom();
-        byte bytes[] = new byte[32];
-        random.nextBytes(bytes);
-        StringBuilder sb = new StringBuilder();
-        for (byte b : bytes) {
-            sb.append(String.format("%02x", b));
-        }
-        System.out.println("HAMC:\n" + sb.toString());
+        generateHMAC();
         System.out.println("Available moves:\n" +
                 "1 - rock\n" +
                 "2 - paper\n" +
@@ -132,7 +136,7 @@ public class RockPaperScissors {
         int compareMoves = userMove.compareMoves(computerMove);
         switch (compareMoves) {
             case 0:
-                System.out.println("Tie!");
+                System.out.println("Draw!");
                 break;
             case 1:
                 System.out.println(userMove + " beats " + computerMove + ". You win!");
@@ -144,14 +148,7 @@ public class RockPaperScissors {
                 break;
 
         }
-        SecureRandom randomEnd = new SecureRandom();
-        byte bytesEnd[] = new byte[32];
-        randomEnd.nextBytes(bytesEnd);
-        StringBuilder sbEnd = new StringBuilder();
-        for (byte b : bytesEnd) {
-            sb.append(String.format("%02x", b));
-        }
-        System.out.println("HAMC:\n" + sbEnd.toString());
+        generateHMAC();
 
         numberOfGames++;
 
